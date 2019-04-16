@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AntMapGenerator
 {
     [System.Serializable]
-    public class MapData : IGrid<int>
+    public class MapData
     {
         readonly string[] layerNames;
         readonly int[,,] data;
