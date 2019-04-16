@@ -1,13 +1,15 @@
 {
-    "name": "AntMapGenerator.Test",
-    "references": [],
+    "name": "AntMapGenerator.Tests",
+  "references": [
+    "AntMapGenerator"
+  ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
-    "includePlatforms": [],
-    "excludePlatforms": [
+    "includePlatforms": [
         "Editor"
     ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
