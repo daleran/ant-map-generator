@@ -8,9 +8,13 @@ namespace AntMapGenerator
     [CreateAssetMenu(fileName = "NewDataLayer", menuName = "Ant Map Generator/DataLayer", order = 361)]
     public class DataLayer : ScriptableObject
     {
+
+
         int[,] data;
         int sizeX;
+        public int SizeX { get => sizeX; }
         int sizeY;
+        public int SizeY { get => sizeY; }
 
         public int this[Vector2Int coord]
         {
