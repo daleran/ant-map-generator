@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapDefinition : MonoBehaviour
+namespace AntMapGenerator
 {
-    // Start is called before the first frame update
-    void Start()
+    [System.Serializable]
+    [CreateAssetMenu(fileName = "NewMapDefinition", menuName = "Ant Map Generator/Map Definition", order = 361)]
+    public class MapDefinition
     {
-        
-    }
+        [SerializeField]
+        Vector2Int center;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField]
+        Vector2Int size;
+
+        [SerializeField]
+        [TextArea()]
+        string description;
+
+        private BoundsInt bounds;
+
+        void OnValidate()
+        {
+            bounds = new BoundsInt(center.x, center.y, size.x, size.y, 1, 1);
+            Debug.Log("Created");
+        }
     }
 }
+

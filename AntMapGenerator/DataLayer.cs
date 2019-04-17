@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AntMapGenerator
 {
     [System.Serializable]
-    [CreateAssetMenu(fileName = "NewDataLayer", menuName = "Ant Map Generator/DataLayer", order = 361)]
+    [CreateAssetMenu(fileName = "NewDataLayer", menuName = "Ant Map Generator/DataLayer", order = 362)]
     public class DataLayer : ScriptableObject
     {
 
