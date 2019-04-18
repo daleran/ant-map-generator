@@ -9,12 +9,21 @@ namespace AntMapGenerator
     public class DataLayer : ScriptableObject
     {
 
+        [SerializeField]
+        MapDefinition definition;
+        public MapDefinition Definition { get => definition; set => definition = value; }
+
+        public int SizeX { get => definition.SizeX; }
+        public int SizeY { get => definition.SizeY; }
+        public BoundsInt Bounds { get => definition.Bounds; }
 
         int[,] data;
-        int sizeX;
-        public int SizeX { get => sizeX; }
-        int sizeY;
-        public int SizeY { get => sizeY; }
+
+        public int this[int x, int y]
+        {
+            get { return data[x, y]; }
+            set { data[x, y] = value; }
+        }
 
         public int this[Vector2Int coord]
         {
@@ -22,27 +31,40 @@ namespace AntMapGenerator
             set { this[coord.x, coord.y] = value; }
         }
 
-        public int this [int x, int y]
+        public bool Contains(int x, int y)
         {
-            get { return data[x, y]; }
-            set { data[x, y] = value; }
+            return definition.Contains(x, y);
         }
 
-        public void Initialize(int sizeX, int sizeY)
+        public void ResetData()
         {
-            this.sizeX = sizeX;
-            this.sizeY = sizeY;
-            data = new int[sizeX, sizeY];
+            data = new int[definition.SizeX,definition.SizeY];
         }
 
-        public bool CheckBounds(int x, int y)
+        public override string ToString()
         {
-            if (x < 0 || x >= sizeX || y < 0 || y >= sizeY)
-                return false;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-            return true;
+            sb.AppendLine(name);
+
+            for (int y = SizeY-1; y > -1; y--)
+            {
+                sb.Append("[ ");
+                for (int x = 0; x < SizeX; x++)
+                {
+                    sb.Append(this[x, y]+" ");
+                }
+                sb.AppendLine("]");
+            }
+
+            return sb.ToString();
         }
 
+        [ContextMenu("Debug Print")]
+        public void DebugPrintToConsole()
+        {
+            Debug.Log(ToString());
+        }
     }
 }
 

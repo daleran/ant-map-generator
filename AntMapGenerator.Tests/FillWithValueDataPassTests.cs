@@ -10,12 +10,16 @@ namespace AntMapGenerator.Tests
     public class FillWithValueDataPassTests
     {
         DataLayer data;
+        MapDefinition def;
 
         [Test]
         public void DataLayerIsSetToConstantValue()
         {
+            def = ScriptableObject.CreateInstance<MapDefinition>();
             data = ScriptableObject.CreateInstance<DataLayer>();
-            data.Initialize(10, 10);
+            def.Initialize(10, 10);
+            data.Definition = def;
+            data.ResetData();
 
             var go = new GameObject("Test");
             var pass = go.AddComponent<FillWithValueDataPass>();

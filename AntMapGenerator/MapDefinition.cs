@@ -5,26 +5,38 @@ using UnityEngine;
 namespace AntMapGenerator
 {
     [System.Serializable]
-    [CreateAssetMenu(fileName = "NewMapDefinition", menuName = "Ant Map Generator/Map Definition", order = 361)]
-    public class MapDefinition
+    [CreateAssetMenu(fileName = "NewMapDefinition", menuName = "Ant Map Generator/MapDefinition", order = 361)]
+    public class MapDefinition : ScriptableObject
     {
         [SerializeField]
-        Vector2Int center;
+        int sizeX;
+        public int SizeX { get => sizeX; }
 
         [SerializeField]
-        Vector2Int size;
+        int sizeY;
+        public int SizeY { get => sizeY; }
 
         [SerializeField]
         [TextArea()]
         string description;
 
-        private BoundsInt bounds;
+        public BoundsInt Bounds { get => new BoundsInt(0, 0, 0, SizeX, SizeY, 1); }
 
-        void OnValidate()
+        public void Initialize(int x, int y)
         {
-            bounds = new BoundsInt(center.x, center.y, size.x, size.y, 1, 1);
-            Debug.Log("Created");
+            sizeX = x;
+            sizeY = y;
         }
+        
+        public bool Contains (int x, int y)
+        {
+            if (x < 0 || x >= sizeX || y < 0 || y >= sizeY)
+                return false;
+
+            return true;
+        }
+
+        
     }
 }
 

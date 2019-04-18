@@ -11,26 +11,17 @@ namespace AntMapGenerator.Tests
     public class DataLayerTests
     {
         DataLayer data;
+        MapDefinition def;
 
         [SetUp]
         public void Setup()
         {
+            def = ScriptableObject.CreateInstance<MapDefinition>();
             data = ScriptableObject.CreateInstance<DataLayer>();
-            data.Initialize(10, 10);
+            def.Initialize(10, 10);
+            data.Definition = def;
+            data.ResetData();
         }
-
-        [Test]
-        [TestCase(-1, 2, ExpectedResult = false)]
-        [TestCase(3, -1, ExpectedResult = false)]
-        [TestCase(10, 2, ExpectedResult = false)]
-        [TestCase(2, 10, ExpectedResult = false)]
-        [TestCase(0, 0, ExpectedResult = true)]
-        [TestCase(9, 9, ExpectedResult = true)]
-        public bool CheckBoundsTest(int x, int y)
-        {
-            return data.CheckBounds(x, y);
-        }
-
 
         [Test]
         [TestCase(5, 5, 2, ExpectedResult = 2)]

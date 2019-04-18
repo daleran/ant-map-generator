@@ -4,29 +4,21 @@ using UnityEngine;
 
 namespace AntMapGenerator
 {
-    public class FillWithValueDataPass : MonoBehaviour, IDataPass
+    public class FillWithValueDataPass : BaseDataPass
     {
-
-        [SerializeField]
-        DataLayer[] layers;
-        public DataLayer[] Layers { get => layers;  set => layers = value; }
-
+          
         [SerializeField]
         int valueToPopulate;
         public int ValueToPopulate { get => valueToPopulate; set => valueToPopulate = value; }
         
-        [SerializeField]
-        IDataPass next;
-        public IDataPass Next { get => next; set => next = value; }
-
-        public void Run()
+        public override void Run()
         {
             for (int i=0;i<Layers.Length;i++)
             {
                 PopulateLayer(Layers[i], valueToPopulate);
             }
 
-            Next.Run();
+            base.Run();
         }
 
         private void PopulateLayer(DataLayer layer, int value)
@@ -38,9 +30,8 @@ namespace AntMapGenerator
                     layer[x, y] = value;
                 }
             }
+            Debug.Log("Running Fill Value");
+            layer.DebugPrintToConsole();
         }
-
-
     }
-
 }
