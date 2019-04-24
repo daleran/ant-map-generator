@@ -30,8 +30,6 @@ namespace AntMapGenerator
                     layer[x, y] = value;
                 }
             }
-            Debug.Log("Running Fill Value");
-            layer.DebugPrintToConsole();
         }
     }
 }
