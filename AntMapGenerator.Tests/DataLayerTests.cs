@@ -57,6 +57,14 @@ namespace AntMapGenerator.Tests
             Assert.That(() => data[10, 3] = 5, Throws.TypeOf<System.IndexOutOfRangeException>());
         }
 
+        [Test]
+        public void DataIsReset()
+        {
+            data[4, 4] = 6;
+            Assert.That(data[4, 4], Is.EqualTo(6));
+            data.ResetData();
+            Assert.That(data[4, 4], Is.Not.EqualTo(6));
+        }
 
     }
 }
